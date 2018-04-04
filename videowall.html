@@ -3,7 +3,7 @@
     <title>Local Slideshow</title>
     <meta name="author" content="François Fournier">
     <style>
-      body { background-color: black; color: white; height: 100%; width: 100%; margin: auto; }
+      body { background-color: black; color: white; height: 100%; width: 100%; margin: auto; font-family: monospace;}
       a { color: grey; }
       #video-container { width: 100%; height: 100%; }
       body:hover div.settings { visibility: visible;}
@@ -41,6 +41,16 @@
       <input type="button" id="clearBtn" value="x">
       <span class="spacer"></span>
       <a class="button" href="https://fafournier.github.io/LocalVideoWall/" style="padding: 0 10px;" title="More info on LocalVideoWall"> i </a>
+      <br>
+      <b>Click modifiers on videos / Shortcuts</b>
+      <ul style="text-align: left; margin: auto; width: 350px; max-width: 100%;">
+        <li>ctrl = mute</li>
+        <li>alt = remove</li>
+        <li>shift = move to 1st position (top right)</li>
+        <li>meta = toggle framing (cover / full)</li>
+        <li>F11 = full screen toggle</li>
+        <li>Exit mouse from window to hide menu</li>
+      </ul>
     </div>
     <script charset="utf-8">
       var files = []; var players = [];
@@ -83,8 +93,8 @@
           videoplayer.onclick = function(e){
             e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation();
             if(e.ctrlKey){this.muted = !this.muted;}
-            else if(e.altKey){files.splice(e.target['dataIndex'],1); console.log("files", files); loadPlayers();}
-            else if(e.shiftKey){files.unshift(...files.splice(e.target['dataIndex'],1)); console.log("files", files); loadPlayers();}
+            else if(e.altKey){files.splice(e.target['dataIndex'],1); loadPlayers();}
+            else if(e.shiftKey){files.unshift(...files.splice(e.target['dataIndex'],1)); loadPlayers();}
             else if(e.metaKey){ if(!~e.target.className.indexOf(' contain')) e.target.className += ' contain'; else e.target.className = e.target.className.replace(' contain', '');}
             else{ this.paused?this.play():this.pause();}
           };
